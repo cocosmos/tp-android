@@ -54,9 +54,10 @@ import com.crea.dev4.mipam.tpandroid.ui.theme.TPAndroidTheme
             modifier = Modifier.padding(bottom = 16.dp)
         ) {
             Text("Nom: ${answers.name}")
+            Text("Android: ${answers.happy}")
             Text("Latitude: ${answers.latitude}")
             Text("Longitude: ${answers.longitude}")
-            Text("Humeur: ${answers.happy}")
+
         }
     }
 
