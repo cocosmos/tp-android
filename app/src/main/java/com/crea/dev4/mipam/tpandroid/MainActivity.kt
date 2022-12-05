@@ -21,8 +21,9 @@ import com.google.android.gms.location.LocationServices
 
 class MainActivity : ComponentActivity() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-     private var tvLatitude: String by mutableStateOf("")
-     private var tvLongitude: String by mutableStateOf("")
+    private var tvLatitude: String by mutableStateOf("")
+    private var tvLongitude: String by mutableStateOf("")
+    private var tvAltitude: String by mutableStateOf("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +45,7 @@ class MainActivity : ComponentActivity() {
     private fun MyApp() {
         var shouldShowBoarding by rememberSaveable { mutableStateOf(true) }
         val shouldGetFormData by rememberSaveable(stateSaver = answerSaver) {
-            mutableStateOf(
-                Answer(
-                    "",
-                    "",
-                    "",
-                    ""
-                )
-            )
+            mutableStateOf(Answer())
         }
 
         if (shouldShowBoarding) {
@@ -64,11 +58,13 @@ class MainActivity : ComponentActivity() {
                 shouldGetFormData = shouldGetFormData,
                 tvLongitude = tvLongitude,
                 tvLatitude = tvLatitude,
+                tvAltitude = tvAltitude,
                 getCurrentLocation = { getCurrentLocation() }
 
             )
         }
     }
+
 
     /**
      * This function is used to get the current location of the device.
@@ -85,6 +81,7 @@ class MainActivity : ComponentActivity() {
                     } else {
                         tvLongitude = location.longitude.toString()
                         tvLatitude = location.latitude.toString()
+                        tvAltitude = roundTo2Decimals(location.altitude).toString()
                     }
                 }
 
@@ -142,20 +139,29 @@ class MainActivity : ComponentActivity() {
      * This function is used to save the state of the form.
      */
     data class Answer(
-        var name: String,
-        var happy: String,
-        var latitude: String,
-        var longitude: String
+        var name: String = "",
+        var happy: String = "",
+        var latitude: String = "",
+        var longitude: String = "",
+        var altitude: String = ""
     )
     private val answerSaver = run {
         val nameKey = "Name"
         val happyKey = "Happy"
         val latitudeKey = "Latitude"
         val longitudeKey = "Longitude"
+        val altitudeKey = "Altitude"
         mapSaver(
-            save = { mapOf(nameKey to it.name, happyKey to it.happy, latitudeKey to it.latitude, longitudeKey to it.longitude) },
-            restore = { Answer(it[nameKey] as String, it[happyKey] as String, it[latitudeKey] as String, it[longitudeKey] as String ) }
+            save = { mapOf(nameKey to it.name, happyKey to it.happy, latitudeKey to it.latitude, longitudeKey to it.longitude, altitudeKey to it.altitude) },
+            restore = { Answer(it[nameKey] as String, it[happyKey] as String, it[latitudeKey] as String, it[longitudeKey] as String, it[altitudeKey] as String) }
         )
+    }
+
+    /** HELPERS
+     * This function is used to round the altitude to 2 decimals.
+     */
+    private fun roundTo2Decimals(number: Double): Double {
+        return (number * 100).toInt() / 100.0
     }
 
 }

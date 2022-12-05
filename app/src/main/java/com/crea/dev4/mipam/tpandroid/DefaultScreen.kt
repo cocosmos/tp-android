@@ -1,6 +1,5 @@
 package com.crea.dev4.mipam.tpandroid
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,9 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.crea.dev4.mipam.tpandroid.ui.theme.TPAndroidTheme
 
 
     @Composable
@@ -61,20 +58,6 @@ import com.crea.dev4.mipam.tpandroid.ui.theme.TPAndroidTheme
         }
     }
 
-
-    @Preview(
-        showBackground = true,
-        widthDp = 320,
-        heightDp = 900,
-        name = "DefaultPreview",
-        uiMode = Configuration.UI_MODE_NIGHT_YES
-    )
-    @Composable
-    fun DefaultPreview() {
-        TPAndroidTheme {
-            BoardingScreen(onDismiss = {}, shouldGetFormData = MainActivity.Answer("", "", "", ""))
-        }
-    }
 
 
 

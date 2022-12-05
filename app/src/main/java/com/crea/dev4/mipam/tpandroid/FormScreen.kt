@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun FormScreen(onDismiss: () -> Unit, shouldGetFormData: MainActivity.Answer, tvLatitude: String, tvLongitude: String, getCurrentLocation: () -> Unit) {
+fun FormScreen(onDismiss: () -> Unit, shouldGetFormData: MainActivity.Answer, tvLatitude: String, tvLongitude: String,tvAltitude:String, getCurrentLocation: () -> Unit) {
     val radioOptions = listOf("J'adore","J'aime bien", "Ni chaud ni froid","J'aime pas", "Je déteste")
 
     val (name, setName) = rememberSaveable { mutableStateOf("") }
@@ -66,6 +66,7 @@ fun FormScreen(onDismiss: () -> Unit, shouldGetFormData: MainActivity.Answer, tv
                 Column(Modifier.padding(20.dp)) {
                     Text(text = "Latitude : $tvLatitude")
                     Text(text = "Longitude : $tvLongitude")
+                    Text(text = "Altitude : $tvAltitude m")
                 }
                 Button(onClick = { getCurrentLocation() }) {
                     Text(text = "Localisation")
