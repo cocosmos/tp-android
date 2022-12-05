@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.dp
             Text("Android: ${answers.happy}")
             Text("Latitude: ${answers.latitude}")
             Text("Longitude: ${answers.longitude}")
+            Text("Altitude: ${answers.altitude}")
 
         }
     }

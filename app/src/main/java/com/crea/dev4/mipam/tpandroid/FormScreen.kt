@@ -23,6 +23,7 @@ fun FormScreen(onDismiss: () -> Unit, shouldGetFormData: MainActivity.Answer, tv
         shouldGetFormData.happy = selectedOption
         shouldGetFormData.latitude = tvLatitude
         shouldGetFormData.longitude = tvLongitude
+        shouldGetFormData.altitude = tvAltitude
         onDismiss()
     }
 
